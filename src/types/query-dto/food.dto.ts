@@ -1,5 +1,5 @@
 import { RecipeImage, Weight } from "./recipe.dto.js";
-import { Nutrition } from "./nutrition.dto.js";
+import { NutritionDetails } from "./nutrition.dto.js";
 
 export interface Food {
     accurate_grams?: boolean | null;
@@ -80,7 +80,7 @@ export interface Food {
     num_reviews?: number | null;
     number_of_ingredients?: number | null;
     number_servings?: number | null;
-    nutrition?: Nutrition | null;
+    nutrition?: NutritionDetails | null;
     one_time_edit?: boolean | null;
     perishable?: boolean | null;
     placeholder_image?: string | null;

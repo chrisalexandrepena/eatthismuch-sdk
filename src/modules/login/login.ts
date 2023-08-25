@@ -15,7 +15,7 @@ export function buildCookieStringFromCredentials({ csrfToken, sessionId }: Sessi
 export async function getSessionCredentials(username, password): Promise<{ csrfToken: string; sessionId: string }> {
     const { token: csrfToken } = await getCsrfToken();
     if (!csrfToken) throw new Error("No CSRF token found");
-    const params = new URLSearchParams({ foo: "bar" });
+    const params = new URLSearchParams();
     params.append("csrfmiddlewaretoken", csrfToken);
     params.append("username", username);
     params.append("password", password);
