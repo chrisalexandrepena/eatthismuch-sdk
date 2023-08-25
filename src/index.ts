@@ -1,5 +1,5 @@
-import { DetailedFoodNutritionDetails, Food, NutritionDetails, Recipe, SessionCredentials } from "./types/index.js";
-import { listCustomFood, getSessionCredentials, getCustomFoodNutritionDetails } from "./modules/index.js";
+import { DetailedFoodNutritionDetails, Food, NutritionDetails, Recipe, RecipeIngredient, SessionCredentials } from "./types/index.js";
+import { listCustomFood, getSessionCredentials, getCustomFoodNutritionDetails, listRecipeIngredients } from "./modules/index.js";
 import { listCustomRecipes } from "./modules/index.js";
 
 export * from "./types/index.js";
@@ -15,11 +15,16 @@ export class EatThisMuch {
         return listCustomRecipes(EatThisMuch._sessionCredentials);
     }
 
+    static listRecipeIngredients(recipeId: number): Promise<RecipeIngredient[]> {
+        if (!EatThisMuch.isLoggedIn()) throw new Error("Please login first");
+        return listRecipeIngredients(recipeId, EatThisMuch._sessionCredentials);
+    }
+
     static listCustomFoods(): Promise<Food[]> {
         if (!EatThisMuch.isLoggedIn()) throw new Error("Please login first");
         return listCustomFood(EatThisMuch._sessionCredentials);
     }
-    static getFoodNutritionDetails(foodIds: string[]): Promise<DetailedFoodNutritionDetails[]> {
+    static getFoodNutritionDetails(foodIds: number[]): Promise<DetailedFoodNutritionDetails[]> {
         if (!EatThisMuch.isLoggedIn()) throw new Error("Please login first");
         return getCustomFoodNutritionDetails(foodIds, EatThisMuch._sessionCredentials);
     }

@@ -1,4 +1,4 @@
-import type { SessionCredentials } from "../../types/index.js";
+import type { RecipeIngredient, SessionCredentials } from "../../types/index.js";
 import type { Recipe } from "../../types/index.js";
 import type { ListResponseDto } from "../../types/index.js";
 import axios from "axios";
@@ -13,4 +13,21 @@ export async function listCustomRecipes(credentials: SessionCredentials): Promis
         },
     });
     return data.objects;
+}
+
+export async function listRecipeIngredients(recipeId: number, credentials: SessionCredentials): Promise<RecipeIngredient[]> {
+    const { data } = await axios.post<RecipeIngredient[]>(
+        "https://www.eatthismuch.com/food/fetch_ingredients/",
+        `recipe_ids=${encodeURIComponent("[" + recipeId + "]")}`,
+        {
+            headers: {
+                Cookie: buildCookieStringFromCredentials(credentials),
+                "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                Origin: "https://www.eatthismuch.com",
+                Referer: "https://www.eatthismuch.com/food-browser/",
+                "X-Csrftoken": credentials.csrfToken,
+            },
+        },
+    );
+    return data;
 }

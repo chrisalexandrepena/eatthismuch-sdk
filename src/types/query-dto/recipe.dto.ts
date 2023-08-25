@@ -129,3 +129,15 @@ export interface RecipeImage {
     thumbnail: string;
     uploader: string;
 }
+
+export interface RecipeIngredient {
+    recipe: number;
+    units: number;
+    food_name: string;
+    description: string;
+    amount: number;
+    unit_description: string;
+    unit_amount: number;
+    gram_amount: number;
+    accurate_grams: boolean;
+}

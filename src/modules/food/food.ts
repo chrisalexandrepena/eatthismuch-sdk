@@ -13,7 +13,7 @@ export async function listCustomFood(credentials: SessionCredentials): Promise<F
     });
     return data.objects;
 }
-export async function getCustomFoodNutritionDetails(foodIds: string[], credentials: SessionCredentials): Promise<DetailedFoodNutritionDetails[]> {
+export async function getCustomFoodNutritionDetails(foodIds: number[], credentials: SessionCredentials): Promise<DetailedFoodNutritionDetails[]> {
     const { data } = await axios.post<DetailedFoodNutritionDetails[]>(
         "https://www.eatthismuch.com/food-browser/custom_nutrition/",
         `food_ids=${encodeURIComponent("[" + foodIds.join(",") + "]")}`,
